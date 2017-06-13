@@ -1,0 +1,234 @@
+	html
+	{ 
+		 background: url(../resources/background.jpg) no-repeat center center fixed; 
+		 -webkit-background-size: cover;
+		 -moz-background-size: cover;
+		 -o-background-size: cover;
+		 background-size: cover;
+		line-height: 24px;
+	}
+	
+	.link
+	{
+	    color: grey;
+	    text-decoration: none;
+	    font-size: 17px;
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    border: 1px solid #ccc;
+		display: block;
+		width: 200px;
+	}
+	
+	/*body
+	{
+		font: 16px Helvetica, Sans-Serif;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-image: url(../resources/background.jpg);
+	}*/
+	
+	.rcorners1
+	{
+	    border-radius: 25px;
+	    background: #73AD21;
+	    padding: 20px; 
+	    width: 200px;
+	    height: 150px; 
+	}
+	
+	#page-wrap
+	{
+		font: 20px Helvetica, Sans-Serif;
+	    border-radius: 40px;
+		background:#7f7f7f;
+		background:rgba(0,0,0,0.6);
+		/*width: 800em;
+		height: 800px;
+		margin: 40px auto 60px;*/
+		height: 95vh;
+		width: 95vw;
+  		text-align:center; 
+    	font-weight: bold;
+	}
+	
+	label
+	{
+		text-align: center;
+	}
+	
+	table, th
+	{
+		width: 200%;
+		border: 1px;
+	}
+	
+	input
+	{
+        position: relative;
+		display: block;
+		margin: auto;
+    }
+	
+	/* #### bootstrap Form #### */
+	.bootstrap-frm {
+	    margin-left:auto;
+	    margin-right:auto;
+	
+	    max-width: 800px;
+	    background: #FFF;
+	    padding: 20px 30px 20px 30px;
+	    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    color: #888;
+	    text-shadow: 1px 1px 1px #000;
+	    border:1px solid #DDD;
+	    border-radius: 5px;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	}
+	.bootstrap-frm h1 {
+	    font: 40px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    padding: 0px 0px 10px 40px;
+	    display: block;
+	    border-bottom: 1px solid #DADADA;
+	    /*margin: -10px -30px 30px -30px;
+	    margin-top: -10px;
+	    margin-bottom:  30px;*/  
+		text-align: justify;
+		margin: 0 auto;
+		width: 5em;
+	    color: #888;
+	    font-weight: 900;
+	}
+	.bootstrap-frm h1>span {
+	    display: block;
+	    font-size: 11px;
+	}
+	.bootstrap-frm label {
+	    display: block;
+	    margin: 0px 0px 5px;
+	}
+	.bootstrap-frm label>span {
+	    float: left;
+	    width: 20%;
+	    text-align: right;
+	    padding-right: 10px;
+	    margin-top: 10px;
+	    color: #333;
+	    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    font-weight: bold;
+	}
+	.bootstrap-frm input[type="text"], .bootstrap-frm input[type="password"], .bootstrap-frm input[type="email"], .bootstrap-frm textarea, .bootstrap-frm select{
+	    border: 1px solid #CCC;
+	    color: #888;
+	    height: 20px;
+	    line-height:15px;
+	    margin-bottom: 16px;
+	    /*margin-right: 6px;*/
+	    margin-top: 2px;
+	    outline: 0 none;
+	    padding: 5px 0px 5px 5px;
+	    width: 40%;
+	    border-radius: 4px;
+	    -webkit-border-radius: 4px;
+	    -moz-border-radius: 4px;    
+	    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	}
+	.bootstrap-frm select {
+	    background: #FFF url('down-arrow.png') no-repeat right;
+	    background: #FFF url('down-arrow.png') no-repeat right;
+	    appearance:none;
+	    -webkit-appearance:none; 
+	    -moz-appearance: none;
+	    text-indent: 0.01px;
+	    text-overflow: '';
+	    width: 70%;
+	    height: 35px;
+	    line-height:15px;
+	}
+	.bootstrap-frm textarea{
+	    height:100px;
+	    padding: 5px 0px 0px 5px;
+	    width: 70%;
+	}
+	.bootstrap-frm .button {
+	    background: #FFF;
+	    border: 1px solid #CCC;
+	    padding: 10px 25px 10px 25px;
+	    color: #333;
+	    border-radius: 4px;
+	}
+	.bootstrap-frm .button:hover {
+	    color: #333;
+	    background-color: #EBEBEB;
+	    border-color: #ADADAD;
+	}
+	
+/*Tabs*/
+
+	.centered-table
+	{
+	    justify-content: center;
+	    width: 50%; 
+	    margin: auto;
+	}
+	
+	#centeredmenu
+	{
+	    justify-content: center;
+	    margin: auto;
+	}
+	
+	/*#table
+	{
+	  align-self: center;
+	}*/
+	
+	/* Style the list */
+	ul.tab {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    border: 1px solid #ccc;
+	}
+	
+	/* Float the list items side by side 
+	ul.tab li {float: left;}*/
+	
+	/*Center the tabs*/
+	ul.tab li
+	{
+		display: inline-block;
+	}
+	
+	/* Style the links inside the list items */
+	ul.tab li a {
+	    display: inline-block;
+	    color: grey;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	    transition: 0.3s;
+	    font-size: 17px;
+	}
+	
+	/* Change background color of links on hover */
+	ul.tab li a:hover {background-color: #000;}
+	
+	/* Create an active/current tablink class */
+	ul.tab li a:focus, .active {background-color: #000;}
+	
+	/* Style the tab content */
+	.tabcontent
+	{
+	    display: none;
+	    padding: 6px 12px;
+	    border: 1px solid #ccc;
+	    border-top: none;
+	    margin: 0 auto;
+	}
