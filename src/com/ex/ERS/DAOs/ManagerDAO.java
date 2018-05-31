@@ -36,7 +36,7 @@ public class ManagerDAO
             while (selectStar.next()) 
             {
                 Employee mvp = new Employee();
-                mvp.setId(selectStar.getInt("id"));
+                mvp.setID(selectStar.getInt("id"));
                 mvp.setFirstname(selectStar.getString("firstname"));
                 mvp.setLastname(selectStar.getString("lastname"));
                 mvp.setEmail(selectStar.getString("email"));

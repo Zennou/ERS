@@ -36,9 +36,8 @@
   		<version>1.2</version>
   	</dependency>
   	<dependency>
-	    <groupId>ojdbc</groupId>
-	    <artifactId>ojdbc</artifactId>
-	    <version>14-10gR3</version>
-	</dependency>
+  		<groupId>hibernate*</groupId>
+  		<artifactId>hibernate*</artifactId>
+  	</dependency>
   </dependencies>
 </project>

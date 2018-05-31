@@ -1,8 +1,15 @@
 package com.ex.ERS.DAOs;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.sql.DataSource;
+import com.ex.ERS.DAOs.ConnectionUtil;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.ex.ERS.Employee;
 
 public class EmployeeDAO
@@ -77,12 +84,28 @@ public class EmployeeDAO
     	finally{}  
     }    
     
-    public Employee login(Employee vip)
-    {    	
-    	String uName = vip.getUsername();
-    	String uPass = vip.getPassword();
-    	String query = "Select employees.id, username, email, password, firstname, lastname, role_id FROM employees JOIN role ON employees.role_id = role.id WHERE username = ? AND password = ?";
-    	String query1 = "Select name FROM role JOIN employees ON employees.role_id = role.id WHERE employees.username = ? AND employees.password = ?";
+    public Employee login(Employee employee)
+    {
+		Session session = ConnectionUtil.getSession();
+    	String uName = employee.getEmail();
+    	String uPass = employee.getPassword();
+    	Query query = session.createQuery("From Employee where email = :uEmail and password = :uPass");
+    	List<Employee> list = query.list();
+    	Iterator iterator = list.iterator();
+    	Transaction transaction = session.beginTransaction();
+    	
+    	while(iterator.hasNext())
+    	{
+    		Employee emp = (Employee)iterator.next();
+        	employee.setID(emp.getID());
+        	employee.setEmail(emp.getEmail());
+        	employee.setPassword(emp.getPassword());
+        	employee.setFirstname(emp.getFirstname());
+        	employee.setLastname(emp.getLastname());
+        	employee.setRoleID(emp.getRoleID());    		
+    	}
+    	
+    	
 
     	try
     	{
@@ -99,18 +122,12 @@ public class EmployeeDAO
 	
 	        if(selectStar.next() && selectStar1.next())
 	        {
-	        	vip.setId(selectStar.getInt("id"));
-	        	vip.setEmail(selectStar.getString("email"));
-	        	vip.setPassword(selectStar.getString("password"));
-	        	vip.setFirstname(selectStar.getString("firstname"));
-	        	vip.setLastname(selectStar.getString("lastname"));
-	        	vip.setRoleID(selectStar.getInt("role_id"));
-	        	vip.setRoleName(selectStar1.getString("name"));
-	        	vip.setExists(true);       
-	        }
-	        else
-	        {
-	        	vip.setExists(false);
+	        	employee.setID(selectStar.getInt("id"));
+	        	employee.setEmail(selectStar.getString("email"));
+	        	employee.setPassword(selectStar.getString("password"));
+	        	employee.setFirstname(selectStar.getString("firstname"));
+	        	employee.setLastname(selectStar.getString("lastname"));
+	        	employee.setRoleID(selectStar.getInt("rol	e_id"));
 	        }
 	        conn.close();
     	}
@@ -159,7 +176,7 @@ public class EmployeeDAO
                conn = null;
             }
          }
-        return vip;
+        return employee;
     }
 
     public List<Employee> list(String userName, String userPass) throws SQLException
@@ -178,7 +195,7 @@ public class EmployeeDAO
             while (selectStar.next()) 
             {
                 Employee mvp = new Employee();
-                mvp.setId(selectStar.getInt("id"));
+                mvp.setID(selectStar.getInt("id"));
                 mvp.setFirstname(selectStar.getString("firstname"));
                 mvp.setLastname(selectStar.getString("lastname"));
                 mvp.setEmail(selectStar.getString("email"));

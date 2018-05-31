@@ -35,7 +35,7 @@ public class StatDAO
             while (resultSet.next()) 
             {
                 Status stat = new Status();
-                stat.setId(resultSet.getInt("id"));
+                stat.setID(resultSet.getInt("id"));
                 stat.setName(resultSet.getString("name"));
                 statuses.add(stat);
             }

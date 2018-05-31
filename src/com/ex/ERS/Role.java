@@ -1,14 +1,26 @@
 package com.ex.ERS;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Roles")
 public class Role
 {
-	int id;
-	String name;
+	@Id
+	@GeneratedValue
+	@Column(name = "Role_ID")
+	private int id;
 	
-	public int getId() {
+	@Column(name = "Role_Name")
+	private String name;
+	
+	public int getID() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	public String getName() {

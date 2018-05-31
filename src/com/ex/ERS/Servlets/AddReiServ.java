@@ -51,7 +51,7 @@ public class AddReiServ extends HttpServlet
 			
 			List<Employee> emps = empDAO.list(userName, userPass);
 			
-			int authID = emps.get(0).getId();
+			int authID = emps.get(0).getID();
 			int typeID =  typeDAO.list().indexOf(request.getParameter("reiType"));
 			double amount = Double.parseDouble(request.getParameter("reiAmount"));
 			String description = request.getParameter("reiDescription");

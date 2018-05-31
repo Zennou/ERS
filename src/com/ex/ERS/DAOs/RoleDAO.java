@@ -39,7 +39,7 @@ public class RoleDAO
             while (selectStar.next()) 
             {
                 Role supportive = new Role();
-                supportive.setId(selectStar.getInt("id"));
+                supportive.setID(selectStar.getInt("id"));
                 supportive.setName(selectStar.getString("name"));
                 roles.add(supportive);
             }

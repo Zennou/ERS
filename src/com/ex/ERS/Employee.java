@@ -1,67 +1,92 @@
 package com.ex.ERS;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Employees")
 public class Employee
 {
-	private int id, roleID;
-	private String email, username, password, firstname, lastname, roleName;
-	private boolean exists;
-	
-	public int getId() {
+   @Id 
+   @GeneratedValue
+   @Column(name = "Employee_ID")
+   private int id;
+
+   @Column(name = "Role_ID")
+   private int roleID;
+
+   @Column(name = "Email")
+   private String email;
+
+   @Column(name = "Password")
+   private String password;
+
+   @Column(name = "First_Name")
+   private String firstname;
+
+   @Column(name = "Last_Name")
+   private String lastname;
+
+   	public int getID()
+	{
 		return id;
 	}
-	public void setId(int id) {
+	
+	public void setID(int id)
+	{
 		this.id = id;
 	}
-	public int getRoleID() {
+	
+	public int getRoleID()
+	{
 		return roleID;
 	}
-	public void setRoleID(int roleID) {
+	
+	public void setRoleID(int roleID)
+	{
 		this.roleID = roleID;
 	}
-	public String getEmail() {
+	
+	public String getEmail()
+	{
 		return email;
 	}
-	public void setEmail(String email) {
+	
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
+	
+	public String getPassword()
+	{
 		return password;
 	}
-	public void setPassword(String password) {
+	
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
-	public String getFirstname() {
+	
+	public String getFirstname()
+	{
 		return firstname;
 	}
-	public void setFirstname(String firstname) {
+	
+	public void setFirstname(String firstname)
+	{
 		this.firstname = firstname;
 	}
-	public String getLastname() {
+	
+	public String getLastname()
+	{
 		return lastname;
 	}
-	public void setLastname(String lastname) {
+	
+	public void setLastname(String lastname)
+	{
 		this.lastname = lastname;
-	}
-	public String getRoleName() {
-		return roleName;
-	}
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-	public boolean isExists() {
-		return exists;
-	}
-	public boolean exists() {
-		return exists;
-	}
-	public void setExists(boolean exists) {
-		this.exists = exists;
 	}
 }
