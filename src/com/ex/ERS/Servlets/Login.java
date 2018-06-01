@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import com.ex.ERS.Employee;
@@ -22,7 +21,6 @@ public class Login extends HttpServlet
 	@Resource(name="jdbc/db")
     private DataSource dataSource;
 	private EmployeeDAO empDAO;
-	private  HttpSession session;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,7 +34,7 @@ public class Login extends HttpServlet
     @Override
     public void init()
     {
-        empDAO = new EmployeeDAO(dataSource);
+        empDAO = new EmployeeDAO();
     }
     
 	/**
@@ -46,46 +44,14 @@ public class Login extends HttpServlet
 	{
 		try
 		{
-			Employee employee = new Employee();
-			employee.setEmail(request.getParameter("uemail"));
-			employee.setPassword(request.getParameter("upass"));
+			String email = request.getParameter("uemail");
+			String password = request.getParameter("upass");
 			
-			employee= empDAO.login(employee);
-			
-    		Query query = session.createQuery("Select email, password from Employee where email = :email and password = :pass");
-    		statement = conn.prepareStatement(query);
-    		statement.setString("email");
-    		statement.setString(3,pass);
-    		statement.executeUpdate();
-			
-			if (employee.exists())
-			{			        
-		          session = request.getSession();	    
-		          session.setAttribute("sessionUser", employee.getUsername()); 
-		          session.setAttribute("sessionPass", employee.getPassword());
-		          session.setAttribute("sessionRoleID", employee.getRoleID());
-		          session.setAttribute("sessionFirstName", employee.getFirstname());
-		          /*session.setAttribute("sessionLastName", ofTheWeek.getLastname());
-		          session.setAttribute("sessionEmail", ofTheWeek.getEmail());*/
-		          
-		          if(employee.getRoleID() == 2)
-		          {
-		        	  request.getRequestDispatcher("home.jsp").forward(request, response);
-		          }
-		          else if (employee.getRoleID() == 1)
-		          {
-				        request.getRequestDispatcher("managerHome.jsp").forward(request, response);
-		          }
-		          else
-		          {
-			        session.setAttribute("sessionError", "Invalid user name/password");
-			        request.getRequestDispatcher("loginError.jsp").forward(request, response);
-		  		}
-		     }
-			else
-			{	   
-		        session.setAttribute("sessionError", "This user is not in our records.");
-		        request.getRequestDispatcher("response.jsp").forward(request, response);
+			Employee employee = empDAO.login(email, password);
+			if(employee != null)
+			{
+				request.getSession().setAttribute("employee", employee);				
+				request.getRequestDispatcher("home.jsp").forward(request, response);
 			}
 		}
 		catch(Exception e)

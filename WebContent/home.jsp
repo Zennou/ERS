@@ -12,7 +12,7 @@
 <body>
 	<div class="bootstrap-frm" id="page-wrap">
 		<h1><strong>Financial<br/>Reimbursement<br/>System</strong></h1>
-		<p>Welcome, <c:out value='${sessionFirstName}' /></p>
+		<p>Welcome, ${sessionFirstName}</p>
 		<p align="center" ><a class="link" href="reimbursements">Reimbursements</a></p>
 		<p align="center"><a class="link" href="employee_info">Employee Info</a></p>
 		<p align="center"><a class="link" href="logout">Logout</a></p>

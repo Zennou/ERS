@@ -25,19 +25,22 @@
     </plugins>
   </build>
   <dependencies>
-  	<dependency>
-  		<groupId>javax.servlet.jsp.jstl</groupId>
-  		<artifactId>jstl-api</artifactId>
-  		<version>1.2-rev-1</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>jstl</groupId>
-  		<artifactId>jstl</artifactId>
-  		<version>1.2</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>hibernate*</groupId>
-  		<artifactId>hibernate*</artifactId>
-  	</dependency>
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>4.0.1</version>
+	    <scope>provided</scope>
+	</dependency>
+	<dependency>
+	  <groupId>org.hibernate</groupId>
+	  <artifactId>hibernate-agroal</artifactId>
+	  <version>5.3.1.Final</version>
+	  <type>pom</type>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
   </dependencies>
 </project>

@@ -1,10 +1,6 @@
 package com.ex.ERS.Servlets;
 
 import java.io.IOException;
-
-import java.sql.SQLException;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,25 +14,23 @@ import com.ex.ERS.Employee;
 import com.ex.ERS.DAOs.*;
 
 /**
- * Servlet implementation class AddReiServ
+ * Servlet implementation class CreateReimbursement
  */
 @WebServlet("/create_reimbursement")
-public class AddReiServ extends HttpServlet
+public class CreateReimbursement extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	@Resource(name="jdbc/db")
     private DataSource dataSource;
-	private EmployeeDAO empDAO;
 	private TypeDAO typeDAO;
-	private ReiDAO reiDAO;
+	private ReimbursementDAO reiDAO;
 	private HttpSession session;
        
     @Override
     public void init()
     {
-        empDAO = new EmployeeDAO(dataSource);
-        typeDAO = new TypeDAO(dataSource);
-        reiDAO = new ReiDAO(dataSource);
+        typeDAO = new TypeDAO();
+        reiDAO = new ReimbursementDAO();
     }
 
 	/**
@@ -46,22 +40,19 @@ public class AddReiServ extends HttpServlet
 	{
 		try
 		{
-			String userName = (String) request.getSession(true).getAttribute("sessionUser");
-			String userPass = (String) request.getSession(true).getAttribute("sessionPass");
+			Employee user = (Employee) request.getSession(true).getAttribute("employee");
 			
-			List<Employee> emps = empDAO.list(userName, userPass);
-			
-			int authID = emps.get(0).getID();
-			int typeID =  typeDAO.list().indexOf(request.getParameter("reiType"));
+			@SuppressWarnings("unlikely-arg-type")
+			int typeID = typeDAO.getTypes().indexOf(request.getParameter("reiType"));
+			int authID = user.getID();
 			double amount = Double.parseDouble(request.getParameter("reiAmount"));
 			String description = request.getParameter("reiDescription");
-			
-			reiDAO.addReimbursement(authID, typeID, amount, description);			        
-	        session = request.getSession();	
-			session.setAttribute("sessionError", "Reimbursement successfully added");
-            request.getRequestDispatcher("reiAdded.jsp").forward(request, response);
+
+			reiDAO.addReimbursement(authID, typeID, amount, description);
+	        session = request.getSession();
+			session.setAttribute("sessionMessage", "Reimbursement successfully added");
 		}
-		catch (SQLException e) 
+		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}

@@ -1,4 +1,74 @@
 package com.ex.ERS.DAOs;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.query.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import com.ex.ERS.Type;
+
+public class TypeDAO
+{
+    public Type getType(String id)
+    {
+    	Session session = ConnectionUtil.getSession();
+    	Transaction transaction = null;
+    	Type type = null;
+    	try
+    	{
+    		transaction = session.getTransaction();
+    		transaction.begin();
+
+    		@SuppressWarnings("unchecked")
+			Query<Type> query = session.createQuery("FROM Type WHERE id ='" + id + "'");
+    		type = (Type)query.uniqueResult();
+    		transaction.commit();    		
+    	}
+		catch(Exception e)
+		{
+			if(transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return type;    	
+    }
+
+    @SuppressWarnings("unchecked")
+	public List<Type> getTypes()
+    {        
+		List<Type> types = new ArrayList<Type>();
+    	Session session = ConnectionUtil.getSession();
+    	Transaction transaction = null;
+    	try
+    	{
+    		transaction = session.getTransaction();
+    		transaction.begin();
+    		types = session.createQuery("FROM Type").list();
+    		transaction.commit();    		
+    	}
+		catch(Exception e)
+		{
+			if(transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return types;
+    }    
+}
+
+/*Old Code
+package com.ex.ERS.DAOs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,3 +135,4 @@ public class TypeDAO
     	finally{}
     }
 }
+*/

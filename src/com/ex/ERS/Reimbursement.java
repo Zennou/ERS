@@ -45,8 +45,8 @@ public class Reimbursement
 	@Column(name = "Reciept")
 	private Blob reciept;
 	
-	public int getId(){return id;}
-	public void setId(int id){this.id = id;}
+	public int getID(){return id;}
+	public void setID(int id){this.id = id;}
 	public int getAuthorID(){return authorID;}
 	public void setAuthorID(int authorID){this.authorID = authorID;}
 	public int getResolverID(){return resolverID;}

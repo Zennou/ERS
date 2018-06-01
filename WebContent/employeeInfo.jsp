@@ -37,6 +37,9 @@
     	<div class="tabcontent" id="empUpdate">
 	    	<form action="update_employee" method="post">
 				<div class="menu">
+					<label for="empEmail" style="display:">Email Address:</label>
+					<input name="empEmail" type="text" style="width:34%;"/>
+					<br/>
 					<label for="empFirstName" style="display:">First Name:</label>
 					<input name="empFirstName" type="text" style="width:34%;"/>
 					<br/>

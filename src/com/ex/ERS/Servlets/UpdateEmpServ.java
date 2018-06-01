@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import com.ex.ERS.Employee;
 import com.ex.ERS.DAOs.EmployeeDAO;
 
 /**
@@ -28,7 +29,7 @@ public class UpdateEmpServ extends HttpServlet
     @Override
     public void init()
     {
-        empDAO = new EmployeeDAO(dataSource);
+        empDAO = new EmployeeDAO();
     }
 
 	/**
@@ -37,17 +38,17 @@ public class UpdateEmpServ extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		try
-		{		        
-	        session = request.getSession();	
-			String username = (String) session.getAttribute("sessionEmail");
-			String password = (String) session.getAttribute("sessionPass");
+		{
+			Employee employee = (Employee) request.getAttribute("employee");
+			//String email = request.getParameter("empEmail");
 			String firstname = request.getParameter("empFirstName");
 			String lastname = request.getParameter("empLastName");
 			String newPassword = request.getParameter("empPassword");
-			empDAO.updateFirstName(username, password, firstname);
-			empDAO.updateLastName(username, password, lastname);
-			empDAO.updatePassword(username, password, newPassword);
-			session.setAttribute("sessionError", "Your information has been updated");
+			//empDAO.updateEmail(employee.getEmail(), email);
+			empDAO.updateFirstName(employee.getEmail(), firstname);
+			empDAO.updateLastName(employee.getEmail(), lastname);
+			empDAO.updatePassword(employee.getEmail(), newPassword);
+			session.setAttribute("sessionMessage", "Your information has been updated");
             request.getRequestDispatcher("response.jsp").forward(request, response);
 		}
 		catch (Exception e)

@@ -1,4 +1,45 @@
 package com.ex.ERS.DAOs;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import com.ex.ERS.Status;
+
+public class StatDAO
+{    
+    @SuppressWarnings("unchecked")
+	public List<Status> getStatuses(String userName) throws SQLException
+    {        
+		List<Status> statuses = new ArrayList<Status>();
+    	Session session = ConnectionUtil.getSession();
+    	Transaction transaction = null;
+    	try
+    	{
+    		transaction = session.getTransaction();
+    		transaction.begin();
+    		statuses = session.createQuery("FROM Status").list();
+    		transaction.commit();    		
+    	}
+		catch(Exception e)
+		{
+			if(transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return statuses;
+    }
+
+}
+
+/*Old Code
+package com.ex.ERS.DAOs;
 import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,3 +88,4 @@ public class StatDAO
     }
 
 }
+*/

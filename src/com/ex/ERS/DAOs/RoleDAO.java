@@ -1,4 +1,75 @@
 package com.ex.ERS.DAOs;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.query.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import com.ex.ERS.Role;
+
+public class RoleDAO
+{
+    public Role getRole(String roleID)
+    {
+    	Session session = ConnectionUtil.getSession();
+    	Transaction transaction = null;
+    	Role role = null;
+    	try
+    	{
+    		transaction = session.getTransaction();
+    		transaction.begin();
+    		
+    		@SuppressWarnings("unchecked")
+			Query<Role> query = session.createQuery("FROM Role WHERE id ='" + roleID + "'");
+    		role = (Role)query.uniqueResult();
+    		transaction.commit();    		
+    	}
+		catch(Exception e)
+		{
+			if(transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return role;    	
+    }
+
+	@SuppressWarnings("unchecked")
+	public List<Role> getRoles()
+    {        
+		List<Role> roles = new ArrayList<Role>();
+    	Session session = ConnectionUtil.getSession();
+    	Transaction transaction = null;
+    	try
+    	{
+    		transaction = session.getTransaction();
+    		transaction.begin();
+    		roles = session.createQuery("FROM Role").list();
+    		transaction.commit();    		
+    	}
+		catch(Exception e)
+		{
+			if(transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return roles;
+    }
+}
+
+/* Old Code
+package com.ex.ERS.DAOs;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,3 +121,4 @@ public class RoleDAO
         finally{}
     }
 }
+*/
